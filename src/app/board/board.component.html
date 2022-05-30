@@ -1,0 +1,16 @@
+<div class="w-75 h-100 float-start p-4" *ngIf="squares.point.length">
+    <div class="h-100 w-75 board">
+        <button 
+            *ngFor="let i = index; let square of squares.point;"
+            class="square" (click)="onClick(i)"
+            [@displayTransit]="square ? 'appear' : null"
+            [class.notNull]="square && !isOver"
+            [class.winner]="squares.class[i]"
+        >{{square}}
+        </button>
+    </div>
+</div>
+
+<div class="w-25 h-100 float-start panel rounded-end border-inline position-relative">
+    <app-status></app-status>
+</div>

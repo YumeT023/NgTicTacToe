@@ -1,0 +1,50 @@
+.board {
+    text-align: center;
+    box-shadow: 0 0 10px rgb(0, 0, 0, 0.1);
+}
+
+.panel {
+    background-color: white;
+    box-shadow: -2px 0 5px rgb(0, 0, 0, 0.08);
+}
+
+.square {
+    background-color: white;
+    border: 1px solid rgb(243, 242, 242);
+    color: white;
+    font-family: cursive;
+    display: block;
+    float: left;
+    width: calc(100% / 3);
+    height: calc(100% / 3);
+    font-size: xx-large;
+    box-sizing: border-box;
+}
+
+.square:hover {
+    background-color: rgb(255, 255, 255, 0.4);
+}
+
+.square:active {
+    background-color: #f8f9fa;
+}
+
+.square.notNull:active {
+    color: white !important;
+    background-color: rgb(202, 72, 72);
+}
+
+.square.winner {
+    background-color: #D8a424;
+    border: 0;
+    color: whitesmoke !important;
+    transition: all, 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.square.winner:hover {
+    background-color: rgba(216, 172, 52, 0.918);
+}
+
+.square.winner:active {
+    background-color: rgb(202, 72, 72);
+}

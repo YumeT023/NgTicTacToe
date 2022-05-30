@@ -1,0 +1,27 @@
+<h5 class="fw-light p-2 text-center bg-dark text-warning border rounded">Status</h5>
+
+<div class="container h-90 overflow-auto">
+
+    <div class="container h-75" *ngIf="messageService.messages.length">
+        <div *ngFor="let status of messageService.messages">
+    
+            <div class="bg-light text-secondary p-2 mb-1 rounded" *ngIf="!status.isError">
+                <b [ngClass]="status.player == 'X' ? 'text-primary' : 'text-danger' ">{{status.player}}</b> : {{status.message}}
+            </div>
+    
+            <div class="alert-danger p-2 mb-1 rounded" *ngIf="status.isError">
+                <b>{{status.player}}</b> : {{status.message}}
+            </div>
+            
+        </div>
+    </div>
+    
+    <div class="container h-75" *ngIf="!messageService.messages.length">
+        <div class="alert-secondary p-2 rounded">the history is empty...</div>
+    </div>
+    
+    <div *ngIf="messageService.messages.length" class="position-absolute bottom-0 mb-3 end-0">
+        <button class="btn btn-dark text-warning float-end me-2" (click)="messageService.clear()">clear</button>
+    </div>
+
+</div>
