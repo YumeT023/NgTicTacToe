@@ -1,3 +1,5 @@
+import { Message } from "./Interface";
+
 export const calculateWinner = (square: string[]): Array<number> | null => {
     const lines = [
         [0, 1, 2],
@@ -17,4 +19,10 @@ export const calculateWinner = (square: string[]): Array<number> | null => {
     }
 
     return null;
+}
+
+export const message = (player: string, message: string, isError?: boolean): Message => {
+    return {
+        player: player, message: message, isError: isError
+    }
 }

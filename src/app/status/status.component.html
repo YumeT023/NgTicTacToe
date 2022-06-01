@@ -6,7 +6,7 @@
         <div *ngFor="let status of messageService.messages">
     
             <div class="bg-light text-secondary p-2 mb-1 rounded" *ngIf="!status.isError">
-                <b [ngClass]="status.player == 'X' ? 'text-primary' : 'text-danger' ">{{status.player}}</b> : {{status.message}}
+                <b [ngClass]="status.player == 'Bot' ? 'text-warning' : status.player == 'X' ? 'text-primary' : 'text-danger'">{{status.player}}</b> : {{status.message}}
             </div>
     
             <div class="alert-danger p-2 mb-1 rounded" *ngIf="status.isError">

@@ -1,6 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
-import { calculateWinner } from '../Helper/HelperFn';
+import { calculateWinner, message as transMessage } from '../Helper/HelperFn';
 import { Message, Square } from '../Helper/Interface';
 import { MessagesService } from '../messages.service';
 
@@ -24,7 +24,7 @@ import { MessagesService } from '../messages.service';
 
 export class BoardComponent implements OnInit {
   squares: Square = {
-    point: Array(9).fill(null),
+    point: Array(9).fill(''),
     class: Array(9).fill(false)
   }
 
@@ -37,29 +37,31 @@ export class BoardComponent implements OnInit {
       return;
     }
 
-    let message: Message = {
-      player: '',
-      message: ''
-    }
-
     if (!this.squares.point[index]) {
       const put = (this.xIsNext = !this.xIsNext) ? 'O' : 'X';
       this.squares.point[index] = put;
-
-
-      message = {...message, message: " it's your turn"};
-
+      
       const winnerLine = calculateWinner(this.squares.point);
 
       if (winnerLine) {
         this.isOver = true;
+        this.messageService.add(transMessage('Bot', 'We have a winner !!!'))
         this.announce(winnerLine);
+        return ;
       }
-    } else {
-      message = {...message, message: " this block is already filled", isError: true};
-    }
 
-    this.messageService.add({...message, player: this.xIsNext ? 'X' : 'O'});
+      if (!this.squares.point.includes('')) {
+        this.isOver = true;
+        this.messageService.add(transMessage("Bot", "Draw '-'"));
+        return ;
+      }
+
+    } else {
+      this.messageService.add(transMessage(this.xIsNext ? 'X' : 'O', 'The block is already filled', true));
+      return ;
+    };
+
+    this.messageService.add(transMessage(this.xIsNext ? 'X' : 'O', "it's you turn ... move"));
   }
 
   announce(winnerLine: number[]) {
@@ -69,7 +71,7 @@ export class BoardComponent implements OnInit {
   constructor(private messageService: MessagesService) { }
 
   ngOnInit(): void {
-    console.log('[BoardComponent]: has been created')
+    console.log('[BoardComponent]: has been created');
   }
 
 }
